@@ -1,0 +1,3 @@
+[build]  command = "pnpm build"  publish = "apps/enji.dev/.next" 
+[[plugins]] 
+  package = "@netlify/plugin-nextjs" 

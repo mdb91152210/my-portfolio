@@ -8,6 +8,7 @@
     "format": "prettier --write ."
   },
   "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.15.1",
     "eslint": "^8.57.1",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.9",
