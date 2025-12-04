@@ -1,4 +1,3 @@
-import { ContentType } from '@prisma/client';
 import clsx from 'clsx';
 import { m, useAnimationControls } from 'framer-motion';
 import { useRouter } from 'next/router';
@@ -80,7 +79,7 @@ function ReactionCounter({ count, children = null }: ReactionCounterProps) {
 }
 
 export type ReactionsProps = {
-  contentType: ContentType;
+  contentType: string;
   contentTitle: string;
   withCountView?: boolean;
 };
