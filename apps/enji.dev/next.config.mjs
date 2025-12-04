@@ -1,7 +1,5 @@
-import bundeAnalyzer from '@next/bundle-analyzer';
+import bundleAnalyzer from '@next/bundle-analyzer';
 import nextMDX from '@next/mdx';
-import rehypePlugins from 'rehype-plugins';
-import remarkPlugins from 'remark-plugins';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -21,15 +19,16 @@ const nextConfig = {
   reactStrictMode: true,
 };
 
-const withBundleAnalyzer = bundeAnalyzer({
+const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 });
 
 const withMDX = nextMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins,
-    rehypePlugins,
+    // REMOVE invalid plugins
+    remarkPlugins: [],
+    rehypePlugins: [],
     providerImportSource: '@mdx-js/react',
   },
 });
