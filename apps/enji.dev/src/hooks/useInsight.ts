@@ -1,10 +1,5 @@
-import { ContentType, ReactionType, ShareType } from '@prisma/client';
 import merge from 'lodash/merge';
-import { useEffect, useRef } from 'react';
-import useSWR from 'swr';
-
-import fetcher from '@/utils/fetcher';
-import { postReaction, postShare, postView } from '@/helpers/api';
+import { useEffect, useState } from 'react';
 
 import type { TContentMetaDetail } from '@/types';
 
@@ -31,105 +26,69 @@ const INITIAL_VALUE: TContentMetaDetail = {
 
 export default function useInsight({
   slug,
-  contentType,
-  contentTitle,
   countView = true,
 }: {
   slug: string;
-  contentType: ContentType;
-  contentTitle: string;
   countView?: boolean;
 }) {
-  // #region handle for batch click
-  const timer = useRef<Record<ReactionType, NodeJS.Timeout>>({
-    CLAPPING: null,
-    THINKING: null,
-    AMAZED: null,
-  });
-  const count = useRef<Record<ReactionType, number>>({
-    CLAPPING: 0,
-    THINKING: 0,
-    AMAZED: 0,
-  });
-  // #endregion
+  const [data, setData] = useState<TContentMetaDetail>(INITIAL_VALUE);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const { isLoading, data, mutate } = useSWR<TContentMetaDetail>(
-    `/api/content/${slug}`,
-    fetcher,
-    {
-      fallbackData: INITIAL_VALUE,
-    }
-  );
-
-  // post view count
+  // Load from localStorage
   useEffect(() => {
-    if (countView) {
-      postView({ slug, contentType, contentTitle });
-    }
-  }, [slug, contentType, contentTitle, countView]);
+    const saved = localStorage.getItem(`insight-${slug}`);
+    if (saved) setData(JSON.parse(saved));
+    setIsLoading(false);
+  }, [slug]);
 
-  const addShare = ({ type }: { type: ShareType }) => {
-    // optimistic update
-    mutate(
-      merge({}, data, {
-        meta: {
-          shares: data.meta.shares + 1,
-        },
-      }),
-      false
-    );
-
-    postShare({
-      slug,
-      contentType,
-      contentTitle,
-      type,
-    });
+  // Save and update localStorage
+  const save = (newData: TContentMetaDetail) => {
+    setData(newData);
+    localStorage.setItem(`insight-${slug}`, JSON.stringify(newData));
   };
 
+  // Count views
+  useEffect(() => {
+    if (!countView) return;
+
+    const updated = merge({}, data, {
+      meta: { views: data.meta.views + 1 },
+    });
+
+    save(updated);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [slug, countView]);
+
+  // Add a share
+  const addShare = () => {
+    const updated = merge({}, data, {
+      meta: { shares: data.meta.shares + 1 },
+    });
+
+    save(updated);
+  };
+
+  // Add reaction
   const addReaction = ({
     type,
-    section = undefined,
   }: {
-    type: ReactionType;
-    section?: string;
+    type: 'CLAPPING' | 'THINKING' | 'AMAZED';
   }) => {
-    // optimistic update
-    mutate(
-      merge({}, data, {
-        meta: {
-          reactions: data.meta.reactions + 1,
-          reactionsDetail: {
-            [type]: data.meta.reactionsDetail[type] + 1,
-          },
+    const updated = merge({}, data, {
+      meta: {
+        reactions: data.meta.reactions + 1,
+        reactionsDetail: {
+          [type]: data.meta.reactionsDetail[type] + 1,
         },
-        metaUser: {
-          reactionsDetail: {
-            [type]: data.metaUser.reactionsDetail[type] + 1,
-          },
+      },
+      metaUser: {
+        reactionsDetail: {
+          [type]: data.metaUser.reactionsDetail[type] + 1,
         },
-      }),
-      false
-    );
+      },
+    });
 
-    // increment the current batch click count
-    count.current[type] += 1;
-
-    // debounce the batch click for sending the reaction data
-    clearTimeout(timer.current[type]);
-    timer.current[type] = setTimeout(() => {
-      postReaction({
-        slug,
-        contentType,
-        contentTitle,
-        type,
-        count: count.current[type],
-        section,
-      }).finally(() => {
-        // reset the batch click count to zero for the next batch
-        count.current[type] = 0;
-      });
-    }, 500);
+    save(updated);
   };
 
   return {
