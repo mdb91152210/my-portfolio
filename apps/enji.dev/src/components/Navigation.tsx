@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { GitHubIcon, TwitterIcon } from '@/components/Icons';
+import { GitHubIcon, LinkedInIcon } from '@/components/Icons';
 import NavIcon from '@/components/navigations/NavIcon';
 import NavIconQuickAccess from '@/components/navigations/NavIconQuickAccess';
 import NavLink from '@/components/navigations/NavLink';
@@ -64,21 +64,26 @@ function Navbar() {
               </li>
             </ul>
           </nav>
+
           <ul className={clsx('flex items-center')}>
+            {/* GitHub */}
             <li className={clsx('hidden', 'sm:block')}>
               <NavIcon
-                href="https://twitter.com/enjidev"
-                icon={<TwitterIcon className={clsx('h-5 w-5')} />}
-                title="Twitter"
-              />
-            </li>
-            <li className={clsx('hidden', 'sm:block')}>
-              <NavIcon
-                href="https://github.com/enjidev"
+                href="https://github.com/mdb91152210/my-portfolio.git"
                 icon={<GitHubIcon className={clsx('h-5 w-5')} />}
                 title="GitHub"
               />
             </li>
+
+            {/* LinkedIn */}
+            <li className={clsx('hidden', 'sm:block')}>
+              <NavIcon
+                href="https://www.linkedin.com/in/mohamed-bilal-b2a8ba361"
+                icon={<LinkedInIcon className={clsx('h-5 w-5')} />}
+                title="LinkedIn"
+              />
+            </li>
+
             <li className={clsx('hidden', 'sm:block')}>
               <div
                 className={clsx(
@@ -87,6 +92,7 @@ function Navbar() {
                 )}
               />
             </li>
+
             <li className={clsx('mr-2')}>
               <NavIconQuickAccess />
             </li>

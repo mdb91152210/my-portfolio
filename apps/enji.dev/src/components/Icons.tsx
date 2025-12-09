@@ -497,7 +497,22 @@ export function NpmIcon({ ...props }: ComponentProps<'svg'>) {
   );
 }
 
-export function TwitterIcon({ ...props }: ComponentProps<'svg'>) {
+// export function TwitterIcon({ ...props }: ComponentProps<'svg'>) {
+//   return (
+//     <svg
+//       xmlns="http://www.w3.org/2000/svg"
+//       viewBox="0 0 24 24"
+//       role="img"
+//       fill="currentColor"
+//       {...props}
+//     >
+//       <title>X / Twitter Icon</title>
+//       <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+//     </svg>
+//   );
+// }
+
+export function LinkedInIcon({ ...props }: ComponentProps<'svg'>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -506,8 +521,8 @@ export function TwitterIcon({ ...props }: ComponentProps<'svg'>) {
       fill="currentColor"
       {...props}
     >
-      <title>X / Twitter Icon</title>
-      <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+      <title>LinkedIn Icon</title>
+      <path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.1c.5-1 1.8-2.2 3.9-2.2 4.1 0 4.8 2.7 4.8 6.2V24h-4v-8.4c0-2-.1-4.5-2.7-4.5-2.7 0-3.1 2.1-3.1 4.3V24h-4V8z" />
     </svg>
   );
 }

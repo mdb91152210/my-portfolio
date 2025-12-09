@@ -1,19 +1,14 @@
 import clsx from 'clsx';
 import Link from 'next/link';
 
-import {
-  ExternalLink,
-  FigmaIcon,
-  GitHubIcon,
-  TwitterIcon,
-} from '@/components/Icons';
+import { ExternalLink, FigmaIcon, GitHubIcon } from '@/components/Icons';
 
 import dayjs from '@/utils/dayjs';
 
 function LastUpdate() {
   return (
     <a
-      href="https://github.com/enjidev/enji.dev"
+      href="https://github.com/mdb91152210/my-portfolio.git"
       target="_blank"
       rel="noreferrer nofollow"
       className={clsx('hover:underline')}
@@ -112,11 +107,11 @@ function FooterDescription() {
         About Me
       </div>
       <p className={clsx('mb-4 font-normal leading-relaxed')}>
-        I&apos;m Enji, a <strong>front-end developer</strong> who loves
+        I&apos;m Bilal, a <strong>front-end developer</strong> who loves
         intuitive, clean and modern UI design.
       </p>
       <ul className={clsx('-ml-2 flex gap-1')}>
-        <li>
+        {/* <li>
           <a
             href="https://twitter.com/enjidev"
             target="_blank"
@@ -127,10 +122,10 @@ function FooterDescription() {
           >
             <TwitterIcon className={clsx('h-5 w-5')} />
           </a>
-        </li>
+        </li> */}
         <li>
           <a
-            href="https://github.com/enjidev"
+            href="https://github.com/mdb91152210"
             target="_blank"
             rel="noreferrer nofollow"
             className={clsx('flex h-9 w-9 items-center justify-center')}
@@ -225,7 +220,7 @@ function Footer() {
                     },
                     {
                       title: 'Source Code',
-                      href: 'https://github.com/enjidev/enji.dev',
+                      href: 'https://github.com/mdb91152210/my-portfolio.git',
                       isInternal: false,
                     },
                     {
