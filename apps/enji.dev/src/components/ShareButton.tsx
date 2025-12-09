@@ -1,15 +1,10 @@
 import { Menu } from '@headlessui/react';
-import { ShareType } from '@prisma/client';
+// import { ShareType } from '@prisma/client';
 import clsx from 'clsx';
 import { m } from 'framer-motion';
 import { forwardRef } from 'react';
 
-import {
-  ExternalLink,
-  NoteIcon,
-  ShareIcon,
-  TwitterIcon,
-} from '@/components/Icons';
+import { ExternalLink, NoteIcon, ShareIcon } from '@/components/Icons';
 
 import useCurrentUrl from '@/hooks/useCurrentUrl';
 
@@ -130,7 +125,7 @@ function ShareButton({ onItemClick = () => {} }: ShareButtonProps) {
               >
                 Share this on
               </div>
-              <Menu.Item>
+              {/* <Menu.Item>
                 {({ active }) => (
                   <ShareItemLink
                     active={active}
@@ -144,7 +139,7 @@ function ShareButton({ onItemClick = () => {} }: ShareButtonProps) {
                     </span>
                   </ShareItemLink>
                 )}
-              </Menu.Item>
+              </Menu.Item> */}
               <div
                 className={clsx(
                   'border-divider-light my-2 border-t',
